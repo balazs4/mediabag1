@@ -1,0 +1,37 @@
+{
+  "name": "mediabag",
+  "version": "0.1.0",
+  "description": "Media bag",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/balazs4/mediabag.git"
+  },
+  "keywords": [
+    "mediabag",
+    "raspberrypi",
+    "kodi",
+    "livestream",
+    "medialibrary"
+  ],
+  "author": "balazs4",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/balazs4/mediabag/issues"
+  },
+  "homepage": "https://github.com/balazs4/mediabag#readme",
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "chai-http": "^1.0.0",
+    "mocha": "^2.3.4",
+    "tsd": "^0.6.5"
+  },
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "kontainer-di": "^0.9.8"
+  }
+}
