@@ -3,16 +3,25 @@ ioc.reset();
 
 ioc.register('express', [], () => {
 	var app = require('express')();
-	
+
 	return app;
 });
 
 ioc.register('server', ['express'], (app) => {
-	
-	app.post('/watchitlater', (req,res) => {
-		res.status(200).end();
+
+	app.post('/watchitlater', (req, res) => {
+		
+		
+		var result = {
+			"link": "google.com"
+		};
+		
+		
+		
+		
+		res.status(201).send(result);
 	});
-	
+
 	return app;
 });
 
