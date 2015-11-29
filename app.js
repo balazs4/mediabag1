@@ -17,13 +17,27 @@ ioc.register('express', [], () => {
 
 ioc.register('server', ['express'], (app) => {
 
-	app.post('/watchitlater', (req, res) => {
-		var input = req.body['iframe'];
+	app.get('/channels', (req, res) => {
+		var channels = require('./channels.json');
+		res.send(channels);
+	});
 
-		var result = {
-			"link": input
-		};
-		res.status(201).send(result);
+	app.post('/watchitlater', (req, res) => {
+		var rp = require('request-promise');
+
+		rp(req.body['iframe'])
+			.then((htmlString) => {
+
+				var file = htmlString
+					.match(/{ 'file': '((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z0-9\.\/\?\:@\-_=&#])*' }/gm)[0];
+					
+				var result = JSON.parse(file);
+				
+				res.status(201).send(result);
+			})
+			.catch((err) => {
+				res.status(500).send(err);
+			});
 	});
 
 	return app;

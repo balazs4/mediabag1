@@ -31,7 +31,9 @@
   },
   "dependencies": {
     "body-parser": "^1.14.1",
+    "cheerio": "^0.19.0",
     "express": "^4.13.3",
-    "kontainer-di": "^0.9.8"
+    "kontainer-di": "^0.9.8",
+    "request-promise": "^1.0.2"
   }
 }
