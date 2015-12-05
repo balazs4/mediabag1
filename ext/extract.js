@@ -32,8 +32,8 @@ page.open("http://rtl.hu/rtlklub/budapest/videok", function (status) {
 		page.evaluate(function () {
 			console.log("Login...")
 			$("#menu-login").click();
-			$("input#logindarkform-email").val('varga27@gmail.com');
-			$("input#logindarkform-password").val('lofasz');
+			$("input#logindarkform-email").val('my@email.com');
+			$("input#logindarkform-password").val('foobar');
 			$("#login-dark-form button.login-button").click();
 			console.log("Waiting...");
 		});
