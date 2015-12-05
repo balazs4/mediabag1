@@ -6,15 +6,10 @@ page.onConsoleMessage = function (msg, line, source) {
 }
 
 page.onResourceRequested = function (req, net) {
-	if (req.url.match(/cdn.rtl.hu/)){
+	if (req.url.match(/cdn.rtl.hu/)){ //let phantomjs ingore the images...
 		net.abort();
 	}
-	//console.log("Request:" + req.url);
 };
-
-page.onResourceReceived = function(res){
-	//console.log("Response:" + res.url);
-}
 
 phantom.onError = function (msg, trace) {
 	console.log("error> " + msg);
@@ -44,7 +39,7 @@ page.open("http://rtl.hu/rtlklub/budapest/videok", function (status) {
 		});
 
 		window.setTimeout(function () {
-			page.evaluate(function () {
+			var ep = page.evaluate(function () {
 				console.log("Extract...")
 				var episode = {
 					"name": $("title").text(),
@@ -53,9 +48,12 @@ page.open("http://rtl.hu/rtlklub/budapest/videok", function (status) {
 					"tags": ["ejjel-nappal-budapest", "rtlmost"],
 					"src": $(location).attr('href')
 				}
-				console.log(JSON.stringify(episode));
+				//console.log(JSON.stringify(episode));
+				return episode;
 			});
-		}, 15000);
+			console.log(JSON.stringify(ep));
+			phantom.exit();
+		}, 5000);
 	});
 
 
