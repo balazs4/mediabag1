@@ -22,6 +22,8 @@ ioc.register('server', ['express'], (app) => {
 		res.send(channels);
 	});
 
+//client:
+//JSON.parse(jQuery(jQuery("div#hmvideo iframe").contents().find("script")[4]).text().match(/{ 'file': '((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z0-9\.\/\?\:@\-_=&#])*' }/gm)[0].replace(/\'/g,"\""))
 	app.post('/watchitlater', (req, res) => {
 		var rp = require('request-promise');
 
