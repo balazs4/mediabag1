@@ -29,13 +29,13 @@ page.open("http://rtl.hu/rtlklub/budapest/videok", function (status) {
 		if (status != "success")
 			phantom.exit();
 
-
 		page.evaluate(function () {
 			console.log("Login...")
 			$("#menu-login").click();
 			$("input#logindarkform-email").val('varga27@gmail.com');
 			$("input#logindarkform-password").val('lofasz');
 			$("#login-dark-form button.login-button").click();
+			console.log("Waiting...");
 		});
 
 		window.setTimeout(function () {
@@ -48,18 +48,10 @@ page.open("http://rtl.hu/rtlklub/budapest/videok", function (status) {
 					"tags": ["ejjel-nappal-budapest", "rtlmost"],
 					"src": $(location).attr('href')
 				}
-				//console.log(JSON.stringify(episode));
 				return episode;
 			});
 			console.log(JSON.stringify(ep));
 			phantom.exit();
-		}, 5000);
+		}, 7000);
 	});
-
-
-
-
-	window.setTimeout(function () {
-		phantom.exit();
-	}, 30000);
 });
