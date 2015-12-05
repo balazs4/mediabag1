@@ -2,21 +2,29 @@
 	{
 		"name": "m1",
 		"url": "http://109.199.58.6/1VloyeAEJmR_2Gszx4IxMgbOay45P6Dz1gyo=/9179/index.m3u8",
-		"icon": "http://www.mediaklikk.hu/wp-content/uploads/sites/4/2013/11/M1.png"
+		"icon": "http://www.mediaklikk.hu/wp-content/uploads/sites/4/2013/11/M1.png",
+		"src" : "http://www.mediaklikk.hu/m1-elo",
+		"tags" : ["live", "mediaklikk"]
 	},
 	{
 		"name": "m2",
 		"url": "http://109.199.57.6/1VlozCgEJvy5Prx8E7zVZegdDlkcd9pc01To=/9180/index.m3u8",
-		"icon": "http://www.mediaklikk.hu/wp-content/uploads/sites/4/2013/11/M2.png"
+		"icon": "http://www.mediaklikk.hu/wp-content/uploads/sites/4/2013/11/M2.png",
+		"src" : "http://www.mediaklikk.hu/m2-elo",
+		"tags" : ["live", "mediaklikk"]
 	},
 	{
 		"name": "m4",
 		"url": "http://78.24.186.240/livedrm/mtva/mtv4live.smil/playlist.m3u8?keys=2RJprtPHkJevVOxFlE500Q&keyt=1448733904",
-		"icon": "http://mediaklikk.cms.mtv.hu/wp-content/uploads/sites/4/2015/06/M4_logo.png"
+		"icon": "http://mediaklikk.cms.mtv.hu/wp-content/uploads/sites/4/2015/06/M4_logo.png",
+		"src" : "http://www.mediaklikk.hu/m4-elo",
+		"tags" : ["live", "mediaklikk"]
 	},
 	{
 		"name": "Duna",
 		"url": "http://212.40.98.161/intstreams/mtva/dunalive_international.smil/playlist.m3u8?keys=5H65KaCww2nEK1l-VCmljQ&keyt=1448734096",
-		"icon": "http://www.mediaklikk.hu/wp-content/uploads/sites/4/2013/11/Duna.png"
+		"icon": "http://www.mediaklikk.hu/wp-content/uploads/sites/4/2013/11/Duna.png",
+		"src" : "http://www.mediaklikk.hu/duna-elo",
+		"tags" : ["live", "mediaklikk"]
 	}
 ]
