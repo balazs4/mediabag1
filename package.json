@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall" : "mongoimport -h 127.0.0.1 -p 27017 -d mediabag -c media --jsonArray ext/mediaklikk.json",
+    "extract" : "ext/index.sh",
     "start": "node index.js",
     "test": "mocha lib/*.spec.js"
   },
