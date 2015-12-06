@@ -12,7 +12,7 @@ page.onResourceRequested = function (req, net) {
 };
 
 phantom.onError = function (msg, trace) {
-	console.log("error> " + msg);
+	//console.log("error> " + msg);
 };
 
 page.open("http://rtl.hu/rtlklub/budapest/videok", function (status) {
@@ -22,7 +22,7 @@ page.open("http://rtl.hu/rtlklub/budapest/videok", function (status) {
 
 	var link = page.evaluate(function () {
 		console.log("Getting link...");
-		return $(location).attr('origin') + "/" + $("a[href^='/most/budapest/ejjel-nappal-budapest-']").attr('href');
+		return $(location).attr('origin') + "/" + $("a[href^='/most/budapest/ejjel-nappal-budapest-20']").attr('href');
 	});
 
 	page.open(link, function (status) {
@@ -32,8 +32,8 @@ page.open("http://rtl.hu/rtlklub/budapest/videok", function (status) {
 		page.evaluate(function () {
 			console.log("Login...")
 			$("#menu-login").click();
-			$("input#logindarkform-email").val('varga27@gmail.com');
-			$("input#logindarkform-password").val('lofasz');
+			$("input#logindarkform-email").val('17kifli@gmail.com');
+			$("input#logindarkform-password").val('*****');
 			$("#login-dark-form button.login-button").click();
 			console.log("Waiting...");
 		});
@@ -54,4 +54,8 @@ page.open("http://rtl.hu/rtlklub/budapest/videok", function (status) {
 			phantom.exit();
 		}, 7000);
 	});
+	
+	window.setTimeout(function(){
+		phantom.exit();
+	}, 30000);
 });

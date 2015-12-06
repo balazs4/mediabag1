@@ -4,6 +4,7 @@
   "description": "Media bag",
   "main": "index.js",
   "scripts": {
+    "preinstall" : "sudo pacman -Sy phantomjs",
     "postinstall" : "mongoimport -h 127.0.0.1 -p 27017 -d mediabag -c media --jsonArray ext/mediaklikk.json",
     "extract" : "ext/index.sh",
     "start": "node index.js",
