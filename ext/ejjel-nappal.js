@@ -32,7 +32,7 @@ page.onResourceReceived = function(res) {
 };
 
 phantom.onError = function(msg, trace) {
-    //console.log("error> " + msg);
+    console.log("error> " + msg);
 };
 
 page.open("http://rtl.hu/most/budapest/ejjel-nappal-budapest-" + date, function(status) {
@@ -62,11 +62,13 @@ page.open("http://rtl.hu/most/budapest/ejjel-nappal-budapest-" + date, function(
                 return episode;
             });
             console.log(JSON.stringify(ep));
+page.render("snapshot.png");
+console.log(page.content);
             phantom.exit();
-        }, 10000);
-    }, 10000);
+        }, 30000);
+    }, 30000);
 
     window.setTimeout(function() {
         phantom.exit();
-    }, 60000);
+    }, 180000);
 });
