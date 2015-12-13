@@ -1,6 +1,6 @@
 #! /bin/sh
 dir=$(dirname "$0")
-episode=$(phantomjs $dir/ejjel-nappal.js $1)
+episode=$(phantomjs $dir/rtlmost.js $1 $2)
 name="{"$(echo $episode | grep -Po '"name":.*?[^\\]"')"}"
 echo $episode
 echo $name

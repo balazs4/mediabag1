@@ -1,35 +1,41 @@
+// ########## ARGUMENTS
+
 var system = require('system');
 var args = system.args;
+
+var timeout = 15000;
+
+var series = [];
+series['ejjel-nappal'] = "http://rtl.hu/most/budapest/ejjel-nappal-budapest";
+series['showder-klub'] = "http://rtl.hu/most/rtl2/showderklub/showder-klub";
+
+var link = series[args[1]];
 
 var now = new Date();
 var month = now.getMonth() + 1;
 var day = now.getDate() < 10 ? "0" + now.getDate() : now.getDate();
 
-var date = args[1] || now.getFullYear() + "-" + month + "-" + day;
-//console.log(date);
+var date = args[2] || now.getFullYear() + "-" + month + "-" + day;
 
+// ############ PAGE
+
+var url = link + "-" + date;
 
 var page = require('webpage').create();
-
-
 page.viewportSize = {
-  width: 900,
-  height: 1600
+    width: 900,
+    height: 1600
 };
-
-page.onConsoleMessage = function(msg, line, source) {
-    //console.log("console>" + msg);
+page.onConsoleMessage = function (msg, line, source) {
+    console.log("console>" + msg);
 }
-
-page.onResourceRequested = function(req, net) {
+page.onResourceRequested = function (req, net) {
     if (req.url.match(/cdn.rtl.hu/)) { //let phantomjs ingore the images...
         net.abort();
     }
     //console.log(req.url);
 };
-
-
-page.onResourceReceived = function(res) {
+page.onResourceReceived = function (res) {
     //console.log(res.url);
     if (res.stage === 'end') {
         //console.log('Status code: ' + res.status);
@@ -38,16 +44,12 @@ page.onResourceReceived = function(res) {
     }
 };
 
-phantom.onError = function(msg, trace) {
-    console.log("error> " + msg);
-};
-
-page.open("http://rtl.hu/most/budapest/ejjel-nappal-budapest-" + date, function(status) {
+page.open(url, function (status) {
     if (status != "success")
         phantom.exit();
 
-    window.setTimeout(function() {
-        page.evaluate(function() {
+    window.setTimeout(function () {
+        page.evaluate(function () {
             console.log("Login...")
             $("div#video-container div.must-login-btns div label:contains('Belépés')").click();
             $("input#loginform-email").val('17kifli@gmail.com');
@@ -56,24 +58,27 @@ page.open("http://rtl.hu/most/budapest/ejjel-nappal-budapest-" + date, function(
             console.log("Waiting...");
         });
 
-        window.setTimeout(function() {
-            var ep = page.evaluate(function() {
+        window.setTimeout(function () {
+            var ep = page.evaluate(function () {
                 console.log("Extract...")
                 var episode = {
                     "name": $("title").text(),
                     "url": $("video source").attr('src'),
                     "icon": $("video").attr('poster'),
-                    "tags": ["ejjel-nappal-budapest", "rtlmost"],
                     "src": $(location).attr('href')
                 }
                 return episode;
             });
+
+            ep['tags'] = [args[1], "rtlmost"];
+            ep['extracted'] = now;
+
             console.log(JSON.stringify(ep));
             phantom.exit();
-        }, 15000);
-    }, 15000);
+        }, timeout);
+    }, timeout);
 
-    window.setTimeout(function() {
+    window.setTimeout(function () {
         phantom.exit();
-    }, 180000);
+    }, timeout * 4);
 });
