@@ -14,7 +14,12 @@ jQuery.get(
 		.find("iframe")
 		.attr('src'))
 	.then(function (content) {
-		var url = content.match(/{ 'file': '((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z0-9\.\/\?\:@\-_=&#])*' }/gm)[0].replace("'file': '", "");
+		var url = content.match(/{ 'file': '((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z0-9\.\/\?\:@\-_=&#])*' }/gm)[0]
+		.replace("'file': '", "")
+		.replace("'", "")
+		.replace("{", "")
+		.replace("}", "")
+		.trim();
 		item['url'] = url;
 		console.log(item);
 		jQuery.post("http://piserver:5555/media", item);
