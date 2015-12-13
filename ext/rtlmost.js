@@ -3,7 +3,7 @@
 var system = require('system');
 var args = system.args;
 
-var timeout = 15000;
+var timeout = 30000;
 
 var series = [];
 series['ejjel-nappal'] = "http://rtl.hu/most/budapest/ejjel-nappal-budapest";
