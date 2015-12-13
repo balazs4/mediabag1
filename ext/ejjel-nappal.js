@@ -12,6 +12,11 @@ var date = args[1] || now.getFullYear() + "-" + month + "-" + day;
 var page = require('webpage').create();
 
 
+page.viewportSize = {
+  width: 900,
+  height: 1600
+};
+
 page.onConsoleMessage = function(msg, line, source) {
     //console.log("console>" + msg);
 }
@@ -20,10 +25,12 @@ page.onResourceRequested = function(req, net) {
     if (req.url.match(/cdn.rtl.hu/)) { //let phantomjs ingore the images...
         net.abort();
     }
+    //console.log(req.url);
 };
 
 
 page.onResourceReceived = function(res) {
+    //console.log(res.url);
     if (res.stage === 'end') {
         //console.log('Status code: ' + res.status);
         if (res.status == 404)
@@ -42,10 +49,10 @@ page.open("http://rtl.hu/most/budapest/ejjel-nappal-budapest-" + date, function(
     window.setTimeout(function() {
         page.evaluate(function() {
             console.log("Login...")
-            $("#menu-login").click();
-            $("input#logindarkform-email").val('17kifli@gmail.com');
-            $("input#logindarkform-password").val('*****');
-            $("#login-dark-form button.login-button").click();
+            $("div#video-container div.must-login-btns div label:contains('Belépés')").click();
+            $("input#loginform-email").val('17kifli@gmail.com');
+            $("input#loginform-password").val('*****');
+            $("#login-form button.login-button").click();
             console.log("Waiting...");
         });
 
@@ -62,11 +69,9 @@ page.open("http://rtl.hu/most/budapest/ejjel-nappal-budapest-" + date, function(
                 return episode;
             });
             console.log(JSON.stringify(ep));
-page.render("snapshot.png");
-console.log(page.content);
             phantom.exit();
-        }, 30000);
-    }, 30000);
+        }, 15000);
+    }, 15000);
 
     window.setTimeout(function() {
         phantom.exit();
