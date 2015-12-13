@@ -1,3 +1,5 @@
+//jQuery.getScript('http://piserver:5555/munkaugyek');
+
 var item = {};
 
 item['name'] = jQuery("div.newStreamPlayerContainer.programInfoBox.nowPlayed span[itemprop='name']").text();
@@ -15,5 +17,5 @@ jQuery.get(
 		var url = content.match(/{ 'file': '((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z0-9\.\/\?\:@\-_=&#])*' }/gm)[0].replace("'file': '", "");
 		item['url'] = url;
 		console.log(item);
-		jQuery.post("http://localhost:5555/media", item);
-	})
+		jQuery.post("http://piserver:5555/media", item);
+	});
