@@ -27,7 +27,7 @@ page.viewportSize = {
     height: 1600
 };
 page.onConsoleMessage = function (msg, line, source) {
-    console.log("console>" + msg);
+    //console.log("console>" + msg);
 }
 page.onResourceRequested = function (req, net) {
     if (req.url.match(/cdn.rtl.hu/)) { //let phantomjs ingore the images...
