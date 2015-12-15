@@ -3,7 +3,7 @@
 var system = require('system');
 var args = system.args;
 
-var timeout = 5000;
+var timeout = 35000;
 
 var series = [];
 series['ejjel-nappal'] = "http://rtl.hu/most/budapest/ejjel-nappal-budapest";
@@ -30,17 +30,16 @@ page.onConsoleMessage = function (msg, line, source) {
     //console.log("console>" + msg);
 }
 page.onResourceRequested = function (req, net) {
-    if (req.url.match(/cdn.rtl.hu/)) { //let phantomjs ingore the images...
+    if (req.url.match(/cdn.rtl.hu/) || req.url.match(/googletagmanager.com/)) { //let phantomjs ingore the images...
         net.abort();
     }
     //console.log(req.url);
 };
 page.onResourceReceived = function (res) {
-    //console.log(res.url);
     if (res.stage === 'end') {
         //console.log('Status code: ' + res.status);
         if (res.status == 404)
-            phantom.exit();
+            console.log(res.url);
     }
 };
 
