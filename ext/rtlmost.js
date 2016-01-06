@@ -13,9 +13,9 @@ var link = series[args[1]];
 
 var now = new Date();
 var month = now.getMonth() + 1;
-var day = now.getDate() < 10 ? "0" + now.getDate() : now.getDate();
+var day = now.getDate() < 10 ? "0" + now.getDate() : now.getDate(); //workaround
 
-var date = args[2] || now.getFullYear() + "-" + month + "-" + day;
+var date = args[2] || now.getFullYear() + "-0" + month + "-" + day;
 
 // ############ PAGE
 
