@@ -4,9 +4,9 @@
   "description": "Media bag",
   "main": "index.js",
   "scripts": {
-    "preinstall" : "sudo pacman -Sy phantomjs",
-    "postinstall" : "mongoimport -h 127.0.0.1 -p 27017 -d mediabag -c media --jsonArray ext/mediaklikk.json",
-    "extract" : "ext/index.sh",
+    "preinstall": "sudo pacman -Sy phantomjs",
+    "postinstall": "mongoimport -h 127.0.0.1 -p 27017 -d mediabag -c media --jsonArray ext/mediaklikk.json",
+    "extract": "ext/index.sh",
     "start": "node index.js",
     "test": "mocha lib/*.spec.js"
   },
@@ -37,6 +37,9 @@
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "kontainer-di": "^0.9.8",
-    "promised-mongo": "^1.2.0"
+    "lodash": "^4.0.0",
+    "ping-lite": "^1.0.1",
+    "promised-mongo": "^1.2.0",
+    "q": "^1.4.1"
   }
 }
