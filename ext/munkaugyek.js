@@ -9,18 +9,19 @@ item['src'] = window.location.href;
 item['extracted'] = new Date();
 
 jQuery.get(
-	jQuery("#hirado_player_box iframe")
-		.contents()
-		.find("iframe")
-		.attr('src'))
-	.then(function (content) {
-		var url = content.match(/{ 'file': '((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z0-9\.\/\?\:@\-_=&#])*' }/gm)[0]
-		.replace("'file': '", "")
-		.replace("'", "")
-		.replace("{", "")
-		.replace("}", "")
-		.trim();
-		item['url'] = url;
-		console.log(item);
-		jQuery.post("http://piserver:5555/media", item);
-	});
+    jQuery("#hirado_player_box iframe")
+        .contents()
+        .find("iframe")
+        .attr('src'))
+    .then(function (content) {
+        var url = content.match(/file: '((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z0-9\.\/\?\:@\-_=&#])*/gm)[0]
+            .replace("file:", "")
+            .replace("'", "")
+            .replace("{", "")
+            .replace("}", "")
+            .trim();
+            
+        item['url'] = url;
+        console.log(item);
+        jQuery.post("http://piserver:5555/media", item);
+    });
