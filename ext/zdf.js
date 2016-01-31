@@ -41,25 +41,28 @@ page.open(topic.url, function (status) {
             return $(this).attr("href");
         });
     });
-    
+
     subpage.open(base + suburls[0], function (substatus) {
         if (substatus != "success")
             phantom.exit();
 
-        var video = subpage.evaluate(function () {
-            return {
-                "name": $("div#content h1.beitragHeadline").text(),
-                "url": $("ul.dslChoice li:contains('DSL 2000') a").attr("href"),
-                "icon": $("div#playerContainer div#zdfplayer1_startImage img").attr("src"),
-                "src": $(location).attr('href'),
-            }
-        });
+        setTimeout(function () {
+            var video = subpage.evaluate(function () {
+                return {
+                    "name": $("div#content h1.beitragHeadline").text(),
+                    "url": $("ul.dslChoice li:contains('DSL 2000') a").attr("href"),
+                    "icon": $("div#playerContainer div#zdfplayer1 img").attr("src") || "http://ftp.halifax.rwth-aachen.de/xbmc/addons/jarvis/plugin.video.zdf_de_lite/icon.png",
+                    "src": $(location).attr('href'),
+                }
+            });
 
-        video['tags'] = topic.tags;
-        video['extracted'] = new Date();
+            video['tags'] = topic.tags;
+            video['extracted'] = new Date();
 
-        console.log(JSON.stringify(video));
-        phantom.exit(0);
+            console.log(JSON.stringify(video));
+            phantom.exit(0);
+        }, 2000);
+
     });
 
 });
