@@ -63,7 +63,7 @@ page.open(topic.url, function (status) {
 
             console.log(JSON.stringify(video));
             phantom.exit(0);
-        }, 2000);
+        }, 10000);
 
     });
 
