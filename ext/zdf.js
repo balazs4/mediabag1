@@ -47,13 +47,11 @@ page.open(topic.url, function (status) {
 
         setTimeout(function () {
             var video = subpage.evaluate(function () {
-                var now = new Date();
-                var month = now.getMonth() + 1;
-                var day = now.getDate() < 10 ? "0" + now.getDate() : now.getDate(); //workaround
-                var date = now.getFullYear() + "-0" + month + "-" + day;
+               var original = $($("p.datum")[0]).text();
+               var splitted = original.match(/(\w+), (\d+).(\d+).(\d+) (\d+:\d+)/);
 
                 return {
-                    "name": date + " " + $($("p.datum")[0]).text().split(",")[0],
+                    "name": splitted[1] + " " + splitted[4] + "-" + splitted[3] + "-" + splitted[2] + " " + splitted[5],
                     "url": $("ul.dslChoice li:contains('DSL 2000') a").attr("href"),
                     "icon": $("div#playerContainer div#zdfplayer1 img").attr("src") || "http://ftp.halifax.rwth-aachen.de/xbmc/addons/jarvis/plugin.video.zdf_de_lite/icon.png",
                     "src": $(location).attr('href'),
