@@ -48,7 +48,7 @@ page.open(topic.url, function (status) {
         setTimeout(function () {
             var video = subpage.evaluate(function () {
                var original = $($("p.datum")[0]).text();
-               var splitted = original.match(/(\w+), (\d+).(\d+).(\d+) (\d+:\d+)/);
+               var splitted = original.match(/(.*), (\d+).(\d+).(\d+) (\d+:\d+)/);
 
                 return {
                     "name": splitted[1] + " " + splitted[4] + "-" + splitted[3] + "-" + splitted[2] + " " + splitted[5],
