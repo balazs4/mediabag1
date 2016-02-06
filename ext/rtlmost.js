@@ -3,7 +3,7 @@
 var system = require('system');
 var args = system.args;
 
-var timeout = 35000;
+var timeout = system.env['MEDIABAG'] || 35000;
 
 var series = [];
 series['ejjel-nappal'] = "http://rtl.hu/most/budapest/ejjel-nappal-budapest";
