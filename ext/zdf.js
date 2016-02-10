@@ -51,7 +51,7 @@ page.open(topic.url, function (status) {
                var splitted = original.match(/(.*), (\d+).(\d+).(\d+) (\d+:\d+)/);
 
                 return {
-                    "name": splitted[1] + " " + splitted[4] + "-" + splitted[3] + "-" + splitted[2] + " " + splitted[5],
+                    "name": splitted[4] + "-" + splitted[3] + "-" + splitted[2] + " " + splitted[5] + " " + splitted[1],
                     "url": $("ul.dslChoice li:contains('DSL 2000') a").attr("href"),
                     "icon": $("div#playerContainer div#zdfplayer1 img").attr("src") || "http://ftp.halifax.rwth-aachen.de/xbmc/addons/jarvis/plugin.video.zdf_de_lite/icon.png",
                     "src": $(location).attr('href'),
