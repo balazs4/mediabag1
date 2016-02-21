@@ -2,7 +2,8 @@
 
 var item = {};
 
-item['name'] = jQuery("div.newStreamPlayerContainer.programInfoBox.nowPlayed span[itemprop='name']").text();
+//item['name'] = jQuery("div.newStreamPlayerContainer.programInfoBox.nowPlayed span[itemprop='name']").text();
+item['name'] = window.document.title;
 item['tags'] = ['munkaugyek', 'mediaklikk'];
 item['icon'] = "https://upload.wikimedia.org/wikipedia/hu/f/f6/Munka%C3%BCgyek.jpg";
 item['src'] = window.location.href;
