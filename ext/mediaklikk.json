@@ -1,7 +1,7 @@
 [
 	{
 		"name": "m1",
-		"url": "http://212.40.98.166/intstreams/mtva/mtv1live_international.smil/playlist.m3u8?keys=cW1WyJg24r7JyV2g9Ovwlg&keyt=1449451843",
+		"url": "http://c402.node62.cdn.connectmedia.hu/1100/98d6bbe1e24b5db431c716cf788ca223/577425c5/index.m3u8?v=3",
 		"icon": "http://www.mediaklikk.hu/wp-content/uploads/sites/4/2013/11/M1.png",
 		"src": "http://www.mediaklikk.hu/m1-elo",
 		"tags": [
@@ -11,7 +11,7 @@
 	},
 	{
 		"name": "m2",
-		"url": "http://212.40.98.162/intstreams/mtva/mtv2live_international.smil/playlist.m3u8?keys=iZfd-hraps2vBVVgXxmx9g&keyt=1449452043",
+		"url": "http://c202.node61.cdn.connectmedia.hu/1101/c1ed98b7fb984445fa8a4895a9d6544d/57742714/index.m3u8?v=3",
 		"icon": "http://www.mediaklikk.hu/wp-content/uploads/sites/4/2013/11/M2.png",
 		"src": "http://www.mediaklikk.hu/m2-elo",
 		"tags": [
@@ -31,7 +31,7 @@
 	},
 	{
 		"name": "Duna",
-		"url": "http://212.40.98.161/intstreams/mtva/dunalive_international.smil/playlist.m3u8?keys=eNkhjMMRqLC58bgIaQ1bXQ&keyt=1449452100",
+		"url": "http://c202.node61.cdn.connectmedia.hu/1102/bacb44f75c745fa0f4bbdb633c78b6df/5774276c/index.m3u8?v=3",
 		"icon": "http://www.mediaklikk.hu/wp-content/uploads/sites/4/2013/11/Duna.png",
 		"src": "http://www.mediaklikk.hu/duna-elo",
 		"tags": [
