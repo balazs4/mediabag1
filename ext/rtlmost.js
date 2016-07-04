@@ -30,7 +30,9 @@ page.onConsoleMessage = function (msg, line, source) {
     //console.log("console>" + msg);
 }
 page.onResourceRequested = function (req, net) {
-    if (req.url.match(/cdn.rtl.hu/) || req.url.match(/googletagmanager.com/)) { //let phantomjs ingore the images...
+    if (req.url.match(/cdn.rtl.hu/) 
+    || req.url.match(/googletagmanager.com/) 
+    || req.url.match(/adform.net/) ) { //let phantomjs ingore the images...
         net.abort();
     }
     //console.log(req.url);
