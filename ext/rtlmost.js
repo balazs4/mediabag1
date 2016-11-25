@@ -15,7 +15,7 @@ var now = new Date();
 var month = now.getMonth() + 1;
 var day = now.getDate() < 10 ? "0" + now.getDate() : now.getDate(); //workaround
 
-var date = args[2] || now.getFullYear() + "-0" + month + "-" + day;
+var date = args[2] || now.getFullYear() + "-" + month + "-" + day;
 
 // ############ PAGE
 
@@ -32,6 +32,8 @@ page.onConsoleMessage = function (msg, line, source) {
 page.onResourceRequested = function (req, net) {
     if (req.url.match(/cdn.rtl.hu/) 
     || req.url.match(/googletagmanager.com/) 
+    || req.url.match(/s0.2mdn.com/)
+    || req.url.match(/s0.2mdn.net/)
     || req.url.match(/adform.net/) ) { //let phantomjs ingore the images...
         net.abort();
     }
