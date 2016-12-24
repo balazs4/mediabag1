@@ -1,85 +1,24 @@
-// ########## ARGUMENTS
+const now = '2016-12-15'
 
-var system = require('system');
-var args = system.args;
-
-var timeout = system.env['MEDIABAG'] || 35000;
-
-var series = [];
-series['ejjel-nappal'] = "http://rtl.hu/most/budapest/ejjel-nappal-budapest";
-series['showder-klub'] = "http://rtl.hu/most/rtl2/showderklub/showder-klub";
-
-var link = series[args[1]];
-
-var now = new Date();
-var month = now.getMonth() + 1;
-var day = now.getDate() < 10 ? "0" + now.getDate() : now.getDate(); //workaround
-
-var date = args[2] || now.getFullYear() + "-0" + month + "-" + day;
-
-// ############ PAGE
-
-var url = link + "-" + date;
-
-var page = require('webpage').create();
-page.viewportSize = {
-    width: 900,
-    height: 1600
-};
-page.onConsoleMessage = function (msg, line, source) {
-    //console.log("console>" + msg);
-}
-page.onResourceRequested = function (req, net) {
-    if (req.url.match(/cdn.rtl.hu/) 
-    || req.url.match(/googletagmanager.com/) 
-    || req.url.match(/adform.net/) ) { //let phantomjs ingore the images...
-        net.abort();
-    }
-    //console.log(req.url);
-};
-page.onResourceReceived = function (res) {
-    if (res.stage === 'end') {
-        //console.log('Status code: ' + res.status);
-        if (res.status == 404)
-            console.log(res.url);
-    }
-};
-
-page.open(url, function (status) {
-    if (status != "success")
-        phantom.exit();
-
-    window.setTimeout(function () {
-        page.evaluate(function () {
-            console.log("Login...")
+require('nightmare')({ show: true  })
+    .viewport(1600, 900)
+    .goto(`http://rtl.hu/most/budapest/ejjel-nappal-budapest-${now}`)
+    .wait("div#video-container")
+    .evaluate(() => {
             $("div#video-container div.must-login-btns div label:contains('Belépés')").click();
             $("input#loginform-email").val('17kifli@gmail.com');
             $("input#loginform-password").val('*****');
             $("#login-form button.login-button").click();
-            console.log("Waiting...");
-        });
-
-        window.setTimeout(function () {
-            var ep = page.evaluate(function () {
-                console.log("Extract...")
-                var episode = {
-                    "name": $("title").text(),
-                    "url": $("video source").attr('src'),
-                    "icon": $("video").attr('poster'),
-                    "src": $(location).attr('href')
-                }
-                return episode;
-            });
-
-            ep['tags'] = [args[1], "rtlmost"];
-            ep['extracted'] = now;
-
-            console.log(JSON.stringify(ep));
-            phantom.exit();
-        }, timeout);
-    }, timeout);
-
-    window.setTimeout(function () {
-        phantom.exit();
-    }, timeout * 4);
-});
+        })
+    .wait("video")
+    .evaluate(() => ({
+            "name": $("title").text(),
+            "url": $("video source").attr('src'),
+            "icon": $("video").attr('poster'),
+            "src": $(location).attr('href'),
+            "tags": ['ejjel-nappal', 'rtlmost'],
+            "extracted": new Date()
+        }))
+    .end()
+    .then(x => console.log(x))
+    .catch(x => console.log(x));

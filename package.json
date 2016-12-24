@@ -1,14 +1,12 @@
 {
   "name": "mediabag",
-  "version": "0.2.0",
-  "description": "Media bag",
+  "version": "2.0.0",
+  "description": "Mediabag",
   "main": "index.js",
   "scripts": {
-    "preinstall": "sudo pacman -Sy phantomjs",
-    "postinstall": "mongoimport -h 127.0.0.1 -p 27017 -d mediabag -c media --jsonArray ext/mediaklikk.json",
-    "extract": "ext/index.sh",
     "start": "node index.js",
-    "test": "mocha lib/*.spec.js"
+    "dev": "nodemon index.js",
+    "test": ""
   },
   "repository": {
     "type": "git",
@@ -22,24 +20,15 @@
     "medialibrary"
   ],
   "author": "balazs4",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/balazs4/mediabag/issues"
   },
   "homepage": "https://github.com/balazs4/mediabag#readme",
   "devDependencies": {
-    "chai": "^3.4.1",
-    "chai-http": "^1.0.0",
-    "mocha": "^2.3.4",
-    "tsd": "^0.6.5"
+    "nodemon": "^1.11.0"
   },
   "dependencies": {
-    "body-parser": "^1.14.1",
-    "express": "^4.13.3",
-    "kontainer-di": "^0.9.8",
-    "lodash": "^4.0.0",
-    "ping-lite": "^1.0.1",
-    "promised-mongo": "^1.2.0",
-    "q": "^1.4.1"
+    "forerunnerdb": "^1.4.25",
+    "nightmare": "^2.8.1"
   }
 }
