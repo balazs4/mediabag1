@@ -12,8 +12,10 @@ const fdb = new forerunnerdb();
 const db = fdb.db(cfg.db);
 db.persist.dataDir(cfg.dir);
 db.persist.auto(true);
+const media = db.collection(cfg.col).deferredCalls(false);
 
 const app = fdb.api.serverApp();
+app.use('/api', require('./api')(media));
 app.get(`/${cfg.col}`, (req,res) => res.redirect(`/fdb/${cfg.db}/collection/${cfg.col}`))
 
 cfg.allows.forEach(method => fdb.api.access(cfg.db, 'collection', '*', method, 'allow'));
