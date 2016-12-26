@@ -16,7 +16,8 @@ const media = db.collection(cfg.col).deferredCalls(false);
 
 const app = fdb.api.serverApp();
 app.use('/api', require('./api')(media));
-app.get(`/${cfg.col}`, (req,res) => res.redirect(`/fdb/${cfg.db}/collection/${cfg.col}`))
+//app.get(`/${cfg.col}`, (req,res) => res.redirect(`/fdb/${cfg.db}/collection/${cfg.col}`))
+app.get(`/${cfg.col}`, (req,res) => res.json(media.find()))
 
 cfg.allows.forEach(method => fdb.api.access(cfg.db, 'collection', '*', method, 'allow'));
 fdb.api.start(cfg.host, cfg.port, { cors: true }, () => console.log('Server is up and running...'));
