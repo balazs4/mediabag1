@@ -24,7 +24,10 @@ const horseman = require('node-horseman');
 const extract = src =>
     new horseman({
         loadImages: false,
-        ignoreSSLErrors: true
+        ignoreSSLErrors: true,
+        timeout: process.env.MEDIABAG || 60000,
+        diskCache: true,
+        diskCachePath: '/tmp/mediabag'
     })
         .viewport(320, 568)
         .userAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1')

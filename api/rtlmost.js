@@ -29,7 +29,10 @@ module.exports = db => {
             const browser =
                 new horseman({
                     loadImages: false,
-                    ignoreSSLErrors: true
+                    ignoreSSLErrors: true,
+                    timeout: process.env.MEDIABAG || 60000,
+                    diskCache: true,
+                    diskCachePath: '/tmp/mediabag'
                 })
                     .viewport(1600, 900)
                     .userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36')
