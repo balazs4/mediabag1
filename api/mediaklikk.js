@@ -20,15 +20,21 @@ const sources = {
         icon: 'http://www.mediaklikk.hu/wp-content/uploads/sites/4/2013/11/Duna.png'
     }
 }
-
+const horseman = require('node-horseman');
 const extract = src =>
-    require('nightmare')({ show: process.env.DEBUG })
+    new horseman({
+        loadImages: false,
+        ignoreSSLErrors: true
+    })
         .viewport(320, 568)
-        .useragent('Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1')
-        .goto(src)
-        .wait('source')
-        .evaluate(() => document.body.children[1].children[0].src)
-        .end();
+        .userAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1')
+        .open(src)
+        .waitForSelector('#videoId')
+        .evaluate(function () {
+            return jQuery('#videoId').children("source").attr('src')
+        })
+        .log()
+        .close();
 
 module.exports = db => {
     const api = require('express').Router();
