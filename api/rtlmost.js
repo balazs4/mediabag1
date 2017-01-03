@@ -62,5 +62,35 @@ module.exports = db => {
                     })
                     .catch(x => res.sendStatus(404));
         })
+
+    api.mkactivity('/', (req, res) => {
+        res.sendStatus(200);
+        const ping = require('ping-lite');
+        const {minBy, flatten, range} = require('lodash');
+
+        Promise.all(
+            flatten(range(10, 50, 10).map(x => 'abcde'.split('').map(y => `${x}${y}`)))
+                .map(x => `smooth.edge${x}.rtl.hu`)
+                .map(x => new ping(x))
+                .map(x => new Promise((resolve, reject) => {
+                    x.send((err, ms) => {
+                        if (err) reject(err)
+                        else resolve({ host: x._host, ms })
+                    })
+                }))
+        )
+            .then(servers => minBy(servers, srv => srv.ms))
+            .then(fastest => {
+                console.log(fastest);
+                db.find({ 'url': /smooth.*.rtl.hu/ }, { _id: 1, url: 1 })
+                    .forEach(({_id, url}) => {
+                        db.update(
+                            { _id },
+                            { url: url.replace(/smooth.*.rtl.hu/, fastest.host) }
+                        );
+                    })
+            });
+    })
+
     return api;
 }
