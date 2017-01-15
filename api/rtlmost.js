@@ -8,6 +8,7 @@ module.exports = db => {
     const horseman = require('node-horseman');
     const api = require('express').Router();
 
+
     api.route('/:serie/:day*?')
         .all((req, res, next) => {
             const {serie, day = moment().format('YYYY-MM-DD') } = req.params;
@@ -30,37 +31,47 @@ module.exports = db => {
                 new horseman({
                     loadImages: false,
                     ignoreSSLErrors: true,
-                    timeout: process.env.MEDIABAG || 60000,
+                    timeout: process.env.MEDIABAG * 4 || 60000,
                     diskCache: true,
                     diskCachePath: '/tmp/mediabag'
+                });
+
+            browser.on('resourceRequested', (req, network) => {
+                console.log(req);
+            })
+
+            browser.on('resourceReceived', (res) => {
+                console.log(res);
+            })
+
+            browser
+                .viewport(1600, 900)
+                .userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36')
+                .open(src)
+                .waitForSelector("div#video-container")
+                .evaluate(function () {
+                    $("div#video-container div.must-login-btns div label:contains('Belépés')").click();
+                    $("input#loginform-email").val('17kifli@gmail.com');
+                    $("input#loginform-password").val('*****');
+                    $("#login-form button.login-button").click();
                 })
-                    .viewport(1600, 900)
-                    .userAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36')
-                    .open(src)
-                    .waitForSelector("div#video-container")
-                    .evaluate(function () {
-                        $("div#video-container div.must-login-btns div label:contains('Belépés')").click();
-                        $("input#loginform-email").val('17kifli@gmail.com');
-                        $("input#loginform-password").val('*****');
-                        $("#login-form button.login-button").click();
-                    })
-                    .wait(process.env.MEDIABAG || 15000)// https://github.com/johntitus/node-horseman/issues/188
-                    .waitForSelector('video')
-                    .evaluate(function () {
-                        return {
-                            "name": $("title").text(),
-                            "url": $("video source").attr('src'),
-                            "icon": $("video").attr('poster'),
-                            "src": $(location).attr('href')
-                        };
-                    })
-                    .log()
-                    .close()
-                    .then(x => {
-                        db.insert(Object.assign({}, x, { tags: [serie], extracted: new Date() }));
-                        res.sendStatus(201);
-                    })
-                    .catch(x => res.sendStatus(404));
+                .wait(process.env.MEDIABAG || 15000)// https://github.com/johntitus/node-horseman/issues/188
+                .waitForSelector('video')
+                .evaluate(function () {
+                    return {
+                        "name": $("title").text(),
+                        "url": $("video source").attr('src'),
+                        "icon": $("video").attr('poster'),
+                        "src": $(location).attr('href')
+                    };
+                })
+                .log()
+                .close()
+                .then(x => {
+                    db.insert(Object.assign({}, x, { tags: [serie], extracted: new Date() }));
+                    res.sendStatus(201);
+                })
+                .catch(x => res.sendStatus(404));
         })
 
     api.mkactivity('/', (req, res) => {
