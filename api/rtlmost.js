@@ -31,17 +31,17 @@ module.exports = db => {
                 new horseman({
                     loadImages: false,
                     ignoreSSLErrors: true,
-                    timeout: process.env.MEDIABAG * 4 || 60000,
+                    timeout: 3 * 60000, 
                     diskCache: true,
                     diskCachePath: '/tmp/mediabag'
                 });
 
             browser.on('resourceRequested', (req, network) => {
-                console.log(req);
+//                console.log(req);
             })
 
             browser.on('resourceReceived', (res) => {
-                console.log(res);
+//                console.log(res);
             })
 
             browser
@@ -55,8 +55,9 @@ module.exports = db => {
                     $("input#loginform-password").val('*****');
                     $("#login-form button.login-button").click();
                 })
-                .wait(process.env.MEDIABAG || 15000)// https://github.com/johntitus/node-horseman/issues/188
+                .wait(30000)// https://github.com/johntitus/node-horseman/issues/188
                 .waitForSelector('video')
+		.wait(30000)
                 .evaluate(function () {
                     return {
                         "name": $("title").text(),
