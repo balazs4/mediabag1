@@ -1,7 +1,7 @@
 const sources = {
     'ejjel-nappal': day => `http://rtl.hu/most/budapest/ejjel-nappal-budapest-${day}`,
     'showder-klub': day => `http://rtl.hu/most/rtl2/showderklub/showder-klub-${day}`,
-    'a-mi-kis-falunk': day => `http://rtl.hu/most/a-mi-kis-falunk-${day}`
+    'a-mi-kis-falunk': day => `http://rtl.hu/most/mikisfalunk/a-mi-kis-falunk-${day}`
 }
 
 module.exports = db => {
