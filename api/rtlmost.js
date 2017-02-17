@@ -1,7 +1,7 @@
 const sources = {
     'ejjel-nappal': day => `http://rtl.hu/most/budapest/ejjel-nappal-budapest-${day}`,
     'showder-klub': day => `http://rtl.hu/most/rtl2/showderklub/showder-klub-${day}`,
-    'a-mi-kis-falunk': day => `http://rtl.hu/a-mi-kis-falunk-${day}`
+    'a-mi-kis-falunk': day => `http://rtl.hu/most/a-mi-kis-falunk-${day}`
 }
 
 module.exports = db => {
@@ -38,7 +38,11 @@ module.exports = db => {
                 });
 
             browser.on('resourceRequested', (req, network) => {
-//                console.log(req);
+		    if (/mp4$/.test(req.url)) {
+			    network.abort();
+			    console.log('Aborting...')
+		    }
+		    console.log(req.url)
             })
 
             browser.on('resourceReceived', (res) => {
