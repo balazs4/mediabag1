@@ -25,5 +25,7 @@
   },
   "homepage": "https://github.com/balazs4/mediabag#readme",
   "devDependencies": {},
-  "dependencies": {}
+  "dependencies": {
+    "phantom": "^4.0.3"
+  }
 }
