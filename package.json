@@ -1,12 +1,10 @@
 {
   "name": "mediabag",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "Mediabag",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": ""
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -14,8 +12,6 @@
   },
   "keywords": [
     "mediabag",
-    "raspberrypi",
-    "kodi",
     "livestream",
     "medialibrary"
   ],
