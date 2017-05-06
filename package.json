@@ -22,6 +22,7 @@
   "homepage": "https://github.com/balazs4/mediabag#readme",
   "devDependencies": {},
   "dependencies": {
+    "debug": "^2.6.6",
     "phantom": "^4.0.3"
   }
 }
